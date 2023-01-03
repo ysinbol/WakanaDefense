@@ -4,5 +4,17 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/prefabs/Scenes/GameTitle.unity
+    guid: cb8ae3a9a338bfd4492837003472a211
+  - enabled: 1
+    path: Assets/prefabs/Scenes/GamePlay.unity
+    guid: 2c47582925765ba47b990483e551ded0
+  - enabled: 1
+    path: Assets/prefabs/Scenes/GameOver.unity
+    guid: a534d5a32442d90469e285472dc2062c
+  - enabled: 1
+    path: Assets/prefabs/Scenes/GameClear.unity
+    guid: ff3802fc6a9566e49919eb65a8691c46
   m_configObjects: {}
