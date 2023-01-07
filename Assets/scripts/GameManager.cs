@@ -13,6 +13,10 @@ public class GameManager : MonoBehaviour
     // GameManagerのインスタンスを取得するためのプロパティ
     public static GameManager Instance { get { return instance; } }
 
+    // シーン遷移時のフェードカラー、フェードスピードのプロパティ
+    [SerializeField] private Color fadeColor = Color.black;
+    [SerializeField] private float fadeSpeedMultiplier = 1.0f;
+
         private enum SceneType
     {
         GameTitle,
@@ -39,12 +43,17 @@ public class GameManager : MonoBehaviour
 
      public void GoToGamePlay()
     {
-        SceneManager.LoadScene(SceneType.GamePlay.ToString());
+        Initiate.Fade(SceneType.GamePlay.ToString(), fadeColor, fadeSpeedMultiplier);
     }
 
     public void GoToGameOver()
     {
-        SceneManager.LoadScene(SceneType.GameOver.ToString());
+        Initiate.Fade(SceneType.GameOver.ToString(), fadeColor, fadeSpeedMultiplier);
+    }
+
+    public void GoToGameClear()
+    {
+        Initiate.Fade(SceneType.GameClear.ToString(), fadeColor, fadeSpeedMultiplier);
     }
 
 }
