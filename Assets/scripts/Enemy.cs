@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMover : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     public float speed = 5.0f;
     public Transform player;
