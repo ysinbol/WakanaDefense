@@ -10,9 +10,11 @@ public class WaveManager : MonoBehaviour
     {
         public List<GameObject> enemyType;
         public int enemyCount;
+        public int enemySpawnInterval;
     }
-
-    // Waveのデータを保持するWaveDataの配列
+    /// <summary>
+    /// Waveのデータを保持するWaveDataの配列
+    /// </summary>
     public WaveData[] waves;
 
     // Waveの間隔（秒）
@@ -32,6 +34,8 @@ public class WaveManager : MonoBehaviour
 
     // 現在のWaveに生成されている敵の数
     private int currentEnemyCount = 0;
+
+    private int currentWaveEnemyCount = 10;
 
     // 敵を生成する間隔（秒）
     public float enemySpawnInterval = 1f;
@@ -61,8 +65,9 @@ public class WaveManager : MonoBehaviour
             // 敵の生成タイマーが敵を生成する間隔を超えた場合
             if (enemySpawnTimer >= enemySpawnInterval)
             {
+                if (currentWaveEnemyCount == currentEnemyCount) return;
                 // 敵を生成する
-                SpawnEnemy();
+                EnemyManager.Instance.SpawnEnemy(enemyPrefab,enemySpawnPoint);
 
                 // 敵の生成タイマーをリセットする
                 enemySpawnTimer = 0;
@@ -109,17 +114,17 @@ public class WaveManager : MonoBehaviour
         // 現在のWaveに生成されている敵の数をリセットする
         currentEnemyCount = 0;
 
-        // 現在のWaveに必要な敵を生成する
-        for (int i = 0; i < waves[currentWave - 1].enemyCount; i++)
-        {
-            SpawnEnemy();
-        }
+        // 現在のwaveで生成する敵の数を取得
+        currentWaveEnemyCount =  waves[currentWave - 1].enemyCount;
     }
 
     // 敵を生成する
     // 敵を生成する
     void SpawnEnemy()
     {
+        // このwaveで生成される数分を生成し終えたらspawnをやめる
+        if (currentWaveEnemyCount == currentEnemyCount) return;
+        
         // 敵を生成する
         GameObject enemy = Instantiate(enemyPrefab, enemySpawnPoint.position, enemySpawnPoint.rotation);
 
